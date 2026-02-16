@@ -3,14 +3,14 @@ name: Validate Registry
 on:
   pull_request:
     paths:
-      - "libraries/**/*.json"
-      - "schema/library.schema.json"
+      - "packages/**/*.json"
+      - "schema/package.schema.json"
       - "scripts/validate_registry.py"
   push:
     branches: [main]
     paths:
-      - "libraries/**/*.json"
-      - "schema/library.schema.json"
+      - "packages/**/*.json"
+      - "schema/package.schema.json"
       - "scripts/validate_registry.py"
 
 jobs:

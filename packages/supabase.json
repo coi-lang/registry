@@ -1,9 +1,9 @@
 {
-  "$schema": "../schema/library.schema.json",
+  "$schema": "../schema/package.schema.json",
   "name": "supabase",
   "schema-version": 1,
   "repository": "https://github.com/coi-lang/lib-supabase",
-  "description": "Supabase client library for Coi.",
+  "description": "Supabase client package for Coi.",
   "keywords": ["supabase", "auth", "database", "storage"],
   "releases": [
     {

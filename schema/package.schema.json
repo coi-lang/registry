@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coi-lang.dev/schemas/library.schema.json",
-  "title": "Coi Library Entry",
-  "description": "Individual library file with metadata and release history",
+  "$id": "https://coi-lang.dev/schemas/package.schema.json",
+  "title": "Coi Package Entry",
+  "description": "Individual package file with metadata and release history",
   "type": "object",
   "additionalProperties": false,
   "required": ["name", "schema-version", "repository", "releases", "createdAt"],
@@ -18,7 +18,7 @@
     "schema-version": {
       "type": "integer",
       "minimum": 1,
-      "description": "Schema version for the library entry format"
+      "description": "Schema version for the package entry format"
     },
     "repository": {
       "type": "string",

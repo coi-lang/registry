@@ -1,33 +1,33 @@
 <div align="center">
     <img src="images/logo.svg" alt="Coi Registry Logo" width="265"/>
 
-# Coi Library Registry
+# Coi Package Registry
 
-Community library index for Coi.
+Community package index for Coi.
 
 </div>
 
-If you want to create a new library first, see Getting Started:
+If you want to create a new package first, see Getting Started:
 
-- [Create a library (Coi Getting Started)](https://github.com/io-eric/coi/blob/main/docs/getting-started.md#creating-a-library)
+- [Create a package (Coi Getting Started)](https://github.com/io-eric/coi/blob/main/docs/getting-started.md)
 
 ## Structure
 
 ```
 registry/
-├── libraries/
-│   ├── lib-supabase.json  # Individual library file
+├── packages/
+│   ├── supabase.json  # Individual package file
 │   └── ...
 └── schema/
-    └── library.schema.json   # Schema for library files
+    └── package.schema.json   # Schema for package files
 ```
 
-- `libraries/**/*.json` — individual library files (discovered automatically)
+- `packages/**/*.json` — individual package files (discovered automatically)
 
-## Add a library
+## Add a package
 
 1. Copy `coi/templates/lib/registry-entry.json` from the compiler repo
-2. Save as `libraries/{your-lib-name}.json` (or shard path like `libraries/ab/{your-lib-name}.json`)
+2. Save as `packages/{your-package-name}.json` (or shard path like `packages/ab/{your-package-name}.json`)
 3. Fill in `repository`, `description`, `keywords`
 4. Run validation:
 
@@ -35,17 +35,17 @@ registry/
 python3 scripts/validate_registry.py --offline
 ```
 
-## Library file format
+## Package file format
 
-Schema: `schema/library.schema.json`
+Schema: `schema/package.schema.json`
 
-Each library file contains:
+Each package file contains:
 
 - `name`: package id (must match filename)
-- `schema-version`: library entry format version
+- `schema-version`: package entry format version
 - `repository`: GitHub URL
 - `releases`: array of version releases (newest first)
-- `createdAt`: when library was first added
+- `createdAt`: when package was first added
 
 Each release contains:
 
