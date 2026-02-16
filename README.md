@@ -26,7 +26,7 @@ registry/
 
 ## Add a package
 
-1. Copy `coi/templates/lib/registry-entry.json` from the compiler repo
+1. Copy `coi/templates/pkg/registry-entry.json` from the compiler repo
 2. Save as `packages/{your-package-name}.json` (or shard path like `packages/ab/{your-package-name}.json`)
 3. Fill in `repository`, `description`, `keywords`
 4. Run validation:
