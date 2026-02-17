@@ -60,27 +60,27 @@
     "release": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["version", "compiler-drop", "releasedAt", "source"],
+      "required": ["version", "compiler", "releasedAt", "source"],
       "properties": {
         "version": {
           "type": "string",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[a-zA-Z0-9.]+)?$",
           "description": "Semver version (e.g. 1.0.0, 0.2.1-beta)"
         },
-        "compiler-drop": {
+        "compiler": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["min", "tested-on"],
+          "required": ["pond", "min-drop"],
           "properties": {
-            "min": {
+            "pond": {
               "type": "integer",
-              "minimum": 1,
-              "description": "Optimistic minimum compiler drop; assumed compatible until proven otherwise"
+              "minimum": 0,
+              "description": "Compiler contract version; compatibility is scoped to matching pond"
             },
-            "tested-on": {
+            "min-drop": {
               "type": "integer",
               "minimum": 1,
-              "description": "Latest compiler drop this release has been tested on"
+              "description": "Minimum compiler drop required within this pond"
             }
           }
         },

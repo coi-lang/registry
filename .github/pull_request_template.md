@@ -9,8 +9,8 @@
 - [ ] Added a new file under `packages/` (for example: `packages/my-package.json`)
 - [ ] `schema-version` is set
 - [ ] `repository` points to the correct GitHub repo
-- [ ] `compiler-drop.min` is set (optimistic minimum)
-- [ ] `compiler-drop.tested-on` is set (verified compiler drop)
+- [ ] `compiler.pond` is set (compiler contract version)
+- [ ] `compiler.min-drop` is set (minimum required drop in this pond)
 - [ ] `releases` contains at least one release entry
 - [ ] `createdAt` and `releasedAt` use `YYYY-MM-DD`
 - [ ] Package repository license is MIT

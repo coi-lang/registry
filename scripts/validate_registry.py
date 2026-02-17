@@ -48,7 +48,7 @@ def http_json(url: str, token: str | None) -> dict:
 
 def validate_release(release: dict, package_name: str, rel_idx: int, seen_versions: set[str]) -> None:
     """Validate a single release entry within a package."""
-    required = ["version", "compiler-drop", "releasedAt", "source"]
+    required = ["version", "compiler", "releasedAt", "source"]
     for key in required:
         if key not in release:
             fail(f"{package_name}: release[{rel_idx}] missing '{key}'")
@@ -64,20 +64,18 @@ def validate_release(release: dict, package_name: str, rel_idx: int, seen_versio
     if not isinstance(released_at, str) or not DATE_RE.match(released_at):
         fail(f"{package_name}: release[{rel_idx}].releasedAt must be YYYY-MM-DD")
 
-    compiler_drop = release.get("compiler-drop")
-    if not isinstance(compiler_drop, dict):
-        fail(f"{package_name}: release[{rel_idx}].compiler-drop must be an object")
+    compiler = release.get("compiler")
+    if not isinstance(compiler, dict):
+        fail(f"{package_name}: release[{rel_idx}].compiler must be an object")
 
-    min_drop = compiler_drop.get("min")
-    tested_on = compiler_drop.get("tested-on")
+    pond = compiler.get("pond")
+    min_drop = compiler.get("min-drop")
+
+    if not isinstance(pond, int) or pond < 0:
+        fail(f"{package_name}: release[{rel_idx}].compiler.pond must be an integer >= 0")
 
     if not isinstance(min_drop, int) or min_drop < 1:
-        fail(f"{package_name}: release[{rel_idx}].compiler-drop.min must be >= 1")
-
-    if not isinstance(tested_on, int) or tested_on < 1:
-        fail(f"{package_name}: release[{rel_idx}].compiler-drop.tested-on must be an integer >= 1")
-    if tested_on < min_drop:
-        fail(f"{package_name}: release[{rel_idx}].compiler-drop.tested-on must be >= min")
+        fail(f"{package_name}: release[{rel_idx}].compiler.min-drop must be >= 1")
 
     source = release.get("source")
     if not isinstance(source, dict):
