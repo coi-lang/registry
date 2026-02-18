@@ -6,7 +6,8 @@
 - First release version:
 
 ### Checklist
-- [ ] Added a new file under `packages/` (for example: `packages/my-package.json`)
+- [ ] Added package metadata (you can stage as `incoming/**/package.json` first)
+- [ ] Ran `python3 scripts/validate_registry.py --promote-incoming --offline` to move it to `packages/<scope>/<name>.json`
 - [ ] `schema-version` is set
 - [ ] `repository` points to the correct GitHub repo
 - [ ] `compiler.pond` is set (compiler contract version)

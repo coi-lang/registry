@@ -25,6 +25,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Promote incoming package files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/validate_registry.py --promote-incoming
+
+      - name: Ensure canonical package paths are committed
+        run: |
+          if ! git diff --exit-code -- packages incoming; then
+            echo ""
+            echo "❌ Found uncommitted path normalization changes after promotion."
+            echo "Run: python3 scripts/validate_registry.py --promote-incoming --offline"
+            echo "Then commit the moved files under packages/<scope>/<name>.json."
+            exit 1
+          fi
+
       - name: Validate registry (online checks)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

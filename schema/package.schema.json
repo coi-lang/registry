@@ -12,8 +12,8 @@
     },
     "name": {
       "type": "string",
-      "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$",
-      "description": "Package name (lowercase, letters/numbers/._-)"
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,62}/[a-z0-9][a-z0-9._-]{0,62}$",
+      "description": "Scoped package name (scope/name, lowercase, letters/numbers/._-)"
     },
     "schema-version": {
       "type": "integer",

@@ -16,25 +16,48 @@ If you want to create a new package first, see Getting Started:
 
 ```
 registry/
+├── incoming/
+│   └── ...                  # Optional staging area (drop package.json here first)
 ├── packages/
-│   ├── supabase.json  # Individual package file
+│   ├── coi/
+│   │   └── supabase.json  # Scoped package file (coi/supabase)
 │   └── ...
 └── schema/
     └── package.schema.json   # Schema for package files
 ```
 
-- `packages/**/*.json` — individual package files (discovered automatically)
+- `packages/<scope>/<name>.json` — individual package files (discovered automatically)
 
 ## Add a package
 
-1. Copy `coi/templates/pkg/package.json` from the compiler repo
-2. Save as `packages/{your-package-name}.json` (or shard path like `packages/ab/{your-package-name}.json`)
-3. Fill in `repository`, `description`, `keywords`
-4. Run validation:
+Simplest workflow:
+
+1. Copy your `package.json` into `incoming/` (any subfolder works, e.g. `incoming/my-pkg/package.json`)
+2. Set `name` to just the package name (e.g. `my-pkg`)
+3. Set the `repository` field to your GitHub repo URL
+4. Run promotion:
+
+```bash
+python3 scripts/validate_registry.py --promote-incoming --offline
+```
+
+That's it! The script will:
+- Auto-set only the scope from repository owner/org (`github.com/alice/my-pkg` → scope `alice`)
+- Keep your package name unchanged (e.g. `my-lib` → `alice/my-lib`)
+- Move the file to `packages/<owner>/<package-name>.json`
+
+Then validate:
 
 ```bash
 python3 scripts/validate_registry.py --offline
 ```
+
+### Placeholder behavior
+
+| Placeholder | Filled from | When |
+|-------------|-------------|------|
+| `__COMMIT_SHA__` | GitHub API (latest commit) | Online mode only |
+| `__TARBALL_SHA256__` | Downloaded tarball hash | Online mode only |
 
 ## Package file format
 
@@ -42,7 +65,7 @@ Schema: `schema/package.schema.json`
 
 Each package file contains:
 
-- `name`: package id (must match filename)
+- `name`: package id in `scope/name` format (must match `packages/<scope>/<name>.json` path)
 - `schema-version`: package entry format version
 - `repository`: GitHub URL
 - `releases`: array of version releases (newest first)

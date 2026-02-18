@@ -1,6 +1,6 @@
 {
-  "$schema": "../schema/package.schema.json",
-  "name": "supabase",
+  "$schema": "https://raw.githubusercontent.com/coi-lang/registry/main/schema/package.schema.json",
+  "name": "coi/supabase",
   "schema-version": 1,
   "repository": "https://github.com/coi-lang/coi-supabase",
   "description": "Supabase client package for Coi.",
